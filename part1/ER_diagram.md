@@ -43,7 +43,7 @@ create table products (
 );
 ```
 
-### 2. Use reverse engineering to create the ER diagram in mysql workbench. Set relevant primary keys and NN values. Create relationships between the table, set the mandotory or optional relationship then save the generated ER diagram:
+### 2. Use reverse engineering to create the ER diagram in mysql workbench. Set relevant primary keys and NN values. Create relationships between the table. Set the mandotory or optional relationship (there may be prducts never ordered). Then, save the generated ER diagram:
 
 ![](assets/image/ER_diagram.png)
 
