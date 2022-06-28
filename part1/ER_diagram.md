@@ -2,7 +2,7 @@
 
 We have used the `AWS crawler` to extract the schema of our ecommerce data set. ER diagrams consist of Conceptual, Logical and Physical Data Models. Noticeably, the **order_products** should be **associative entity** to resolve many-to-many relationship. As we already had the schema availabe, I created the final version of physical ER data model by the following steps:
 
-### 1. Create a local schema in `mysql workbench`
+### 1. Create a local schema in `MySQL Workbench`
 ```sql
 create DATABASE ecommerce;
 
