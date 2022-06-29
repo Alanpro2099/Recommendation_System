@@ -178,5 +178,5 @@ jobs:
 #### **New crawler has been built and is waiting for running:**
 ![](assets/image/new-crawler.png)
 
-#### **After running the new crawler, from `AWS Athena`, we can find the logical tables are successully generated and stored in the new database:**
+#### **After running the new crawler, from `AWS Athena`, we can find the logical external tables are successully generated and stored in the new database:**
 ![](assets/image/crawler-results.png) 
