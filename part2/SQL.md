@@ -14,10 +14,9 @@ WHERE a.eval_set = 'prior');
 
 ### 2. Create a SQL query (user_features_1). Based on table orders, for each user, calculate the max order_number, the sum of days_since_prior_order and the average of days_since_prior_order.
 ```sql
-select user_id, max(order_number) AS max_ord_num, sum(days_since_prior_order) AS sum_of_days, round(sum(days_since_prior_order)/count(user_id),2) AS average_days_since_prior_order
+select user_id, max(order_number) AS max_ord_num, sum(days_since_prior_order) AS sum_of_days, round(AVG(days_since_prior_order),2) AS average_days_since_prior_order
 from orders
-group by user_id
-order by user_id;
+group by user_id;
 ```
 ### Resulting table user_features_1 preview:
 ![](assets/images/q2.png)
@@ -29,8 +28,7 @@ round(CAST(sum(CASE WHEN reordered = 1 THEN 1 ELSE 0 END) AS double)/count(CASE
                    WHEN order_number > 1 THEN 1
                    END),4) AS reordered_ratio
 from order_products_prior
-group by user_id
-order by user_id;
+group by user_id;
 ```
 ### Resulting table user_features_2 preview:
 ![](assets/images/q3.png)
@@ -40,8 +38,7 @@ order by user_id;
 select user_id, product_id, count(distinct order_id) AS total_number_of_orders, min(order_number) AS min_order_number, 
 max(order_number) AS max_order_number, round(avg(add_to_cart_order),2) AS avg_add_to_cart_order
 from order_products_prior
-group by user_id, product_id
-order by user_id, product_id;
+group by user_id, product_id;
 ```
 ### Resulting table up_features preview:
 ![](assets/images/q4.png)
@@ -49,16 +46,14 @@ order by user_id, product_id;
 ### 5. Create a SQL query (prd_features). Based on table order_products_prior, first write a sql query to calculate the sequence of product purchase for each user, and name it product_seq_time (For example, if a user first time purchase a product A, mark it as 1. If it’s the second time a user purchases a product A, mark it as 2).Then on top of this query, for each product, calculate the count, sum of reordered, count of product_seq_time = 1 and count of product_seq_time = 2.
 ```sql
 -- subquery will generate the the sequence of product purchase for each user
-select product_id, count(reordered) AS cnt_reordered, sum(reordered) AS sum_reordered, 
-count(case when product_seq_time = 1 then 1 end) AS cnt_product_seq_time_1,
-count(case when product_seq_time = 2 then 1 end) AS cnt_product_seq_time_2
+select product_id, count(*) AS cnt_prod_orders, sum(reordered) AS cnt_prod_reorders, 
+count(case when product_seq_time = 1 then 1 end) AS cnt_product_first_orders,
+count(case when product_seq_time = 2 then 1 end) AS cnt_product_second_orders
 from 
 (select user_id, order_number, product_id, reordered,
-sum(1) over (partition by user_id, product_id order by user_id, order_number) AS product_seq_time
-from order_products_prior
-order by user_id, order_number) a
-group by product_id
-order by product_id;
+sum(1) over (partition by user_id, product_id order by order_number) AS product_seq_time
+from order_products_prior) a
+group by product_id;
 ```
 ### Resulting table up_features preview:
 ![](assets/images/q5.png)
