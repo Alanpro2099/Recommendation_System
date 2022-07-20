@@ -55,5 +55,5 @@ sum(1) over (partition by user_id, product_id order by order_number) AS product_
 from order_products_prior) a
 group by product_id;
 ```
-### Resulting table up_features preview:
+### Resulting table prd_features preview:
 ![](assets/images/q5.png)
