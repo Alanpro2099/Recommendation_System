@@ -5,13 +5,21 @@
 - ### Step 2 Create projects and associative recipes
 ![](assets/images/p12.png)
 1. up_features recipe:
-![](assets/images/p4.png)
+
+<img src="assets/images/p4.png" width="50%"/>
+
 2. user_features_1 recipe:
-![](assets/images/p2.png)
+
+<img src="assets/images/p2.png" width="50%"/>
+
 3. user_features_2 recipe:
-![](assets/images/p3.png)
+
+<img src="assets/images/p3.png" width="50%"/>
+
 4. prd_features recipe:
-![](assets/images/p1.png)
+
+<img src="assets/images/p1.png" width="50%"/>
+
 - ### Step 3 Create jobs to generate parquet files for each feature table and store them into S3 folders
 ![](assets/images/p13.png)
 
