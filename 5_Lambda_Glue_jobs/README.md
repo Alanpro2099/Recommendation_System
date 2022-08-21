@@ -55,7 +55,7 @@ def lambda_handler(event, context):
             JobName=job_name
         )
         job_run_id = reponse['JobRunId']
-            # Retrieve metadata from the job run and wait until success
+        # Retrieve metadata from the job run and wait until success
         while True:
             time.sleep(10)
             reponse2 = client.get_job_run(
