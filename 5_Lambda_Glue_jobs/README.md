@@ -45,6 +45,7 @@ The lambda function is as following:
 import json
 import boto3
 import os
+import time
 
 def lambda_handler(event, context):
     job_name = os.environ['JOB_NM']
@@ -53,8 +54,23 @@ def lambda_handler(event, context):
         reponse = client.start_job_run(
             JobName=job_name
         )
+        job_run_id = reponse['JobRunId']
+            # Retrieve metadata from the job run and wait until success
+        while True:
+            time.sleep(10)
+            reponse2 = client.get_job_run(
+                JobName=job_name,
+                RunId=job_run_id
+            )
+            if reponse2['JobRun']['JobRunState'] == 'SUCCEEDED':
+                print('The job ', job_name, 'with running id ', job_run_id, 'has succeeded')
+                break
+            elif reponse2['JobRun']['JobRunState'] == 'FAILED':
+                print('The job ', job_name, 'with running id ', job_run_id, 'has failed. Please check!')
+                break
     except:
         print("The job ",job_name, " has failed, please check")
+
     return reponse
 ```
 Set the environment variable to be the glue job name. The schedule rule is also created:
