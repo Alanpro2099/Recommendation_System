@@ -1,6 +1,7 @@
 # Ecommerce_project
-3 million entries business data analysis. 
-This simplified version is for presenation purpose only.
+This project aims to develop a product recommendation system based on real commercial data. 
+It provides a complete solution including automated ETL process and machine learning model deployment.
+This version is for presenation purpose only.
 ## **High level architecture**
 ![](assets/images/Architecture.png)
 ## **Airflow ETL orchestration**
