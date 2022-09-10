@@ -17,11 +17,7 @@ from airflow.providers.amazon.aws.operators.s3 import (
 )
 from airflow.providers.amazon.aws.operators.glue_crawler import GlueCrawlerOperator
 from airflow.providers.amazon.aws.sensors.glue_crawler import GlueCrawlerSensor
-from airflow.providers.amazon.aws.operators.s3 import (
-    S3CreateBucketOperator,
-    S3CreateObjectOperator,
-    S3DeleteBucketOperator,
-)
+
 from airflow.models import Variable
 
 default_args = {
